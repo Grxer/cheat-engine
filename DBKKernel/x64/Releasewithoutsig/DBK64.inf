@@ -1,0 +1,79 @@
+;
+; xer64.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+CatalogFile=xer64.cat
+DriverVer = 04/06/2026,17.12.57.276
+
+[DestinationDirs]
+DefaultDestDir = 12
+xer64_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+xer64.sys  = 1,,
+WdfCoInstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%xer64.DeviceDesc%=xer64_Device, Root\xer64 ; TODO: edit hw-id
+
+[xer64_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+xer64.sys
+
+;-------------- Service installation
+[xer64_Device.NT.Services]
+AddService = xer64,%SPSVCINST_ASSOCSERVICE%, xer64_Service_Inst
+
+; -------------- xer64 driver install sections
+[xer64_Service_Inst]
+DisplayName    = %xer64.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\xer64.sys
+
+;
+;--- xer64_Device Coinstaller installation ------
+;
+
+[xer64_Device.NT.CoInstallers]
+AddReg=xer64_Device_CoInstaller_AddReg
+CopyFiles=xer64_Device_CoInstaller_CopyFiles
+
+[xer64_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[xer64_Device_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[xer64_Device.NT.Wdf]
+KmdfService =  xer64, xer64_wdfsect
+[xer64_wdfsect]
+KmdfLibraryVersion = 1.9
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="xer64" ;TODO: Replace with your manufacturer name
+ClassName="System" ; TODO: edit ClassName
+DiskName = "xer64 Installation Disk"
+xer64.DeviceDesc = "xer64 Device"
+xer64.SVCDESC = "xer64 Service"

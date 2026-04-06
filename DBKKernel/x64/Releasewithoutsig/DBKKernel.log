@@ -1,0 +1,28 @@
+﻿D:\MicrosoftVisualStudio2019\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(77,5): warning : 对路径“e:\cheat-engine-sc\cheat-engine\cheat engine\bin\xer64.sys”的访问被拒绝。
+  Building 'DBKKernel' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping x64\Releasewithoutsig\DBK64.inf
+  Stamping [Version] section with DriverVer=04/06/2026,17.12.57.276
+E:\cheat-engine-sc\cheat-engine\DBKKernel\DBK64.inf(5-5): warning 1324: [Version] section should specify PnpLockdown=1.
+  Assembling amd64\dbkfunca.asm...
+  Assembling amd64\debuggera.asm...
+  Assembling amd64\noexceptionsa.asm...
+  Assembling amd64\ultimapa.asm...
+  Assembling amd64\vmxhelpera.asm...
+  Assembling amd64\vmxoffloada.asm...
+  DBKDrvr.c
+  DBKFunc.c
+  debugger.c
+  deepkernel.c
+  interruptHook.c
+  IOPLDispatcher.c
+  memscan.c
+  noexceptions.c
+  processlist.c
+  threads.c
+  ultimap.c
+  ultimap2.c
+  apic.c
+  vmxhelper.c
+  vmxoffload.c
+  正在生成代码...
+LINK : fatal error LNK1104: 无法打开文件“..\Cheat Engine\bin\xer64.sys”
